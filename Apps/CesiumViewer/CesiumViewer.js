@@ -235,7 +235,7 @@ function main() {
       timeout = window.setTimeout(saveCamera, 1000);
     });
   }
-
+  viewer.zoomTo(loadPromise);
   loadingIndicator.style.display = "none";
 }
 

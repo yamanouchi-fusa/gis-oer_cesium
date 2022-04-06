@@ -38,6 +38,7 @@ function main() {
                            [height,heading,pitch,roll] default is looking straight down, [300,0,-90,0]
        saveCamera=false    Don't automatically update the camera view in the URL when it changes.
      */
+  const source = "../SampleData/Vehicle.czml"
   const endUserOptions = queryToObject(window.location.search.substring(1));
 
   let imageryProvider;

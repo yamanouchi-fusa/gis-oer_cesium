@@ -105,7 +105,7 @@ function main() {
 
   const view = endUserOptions.view;
   // const source = endUserOptions.source;
-  const source = "../SampleData/Vehicle.czml";
+  const source = "../SampleData/sample.czml";
   if (defined(source)) {
     let sourceType = endUserOptions.sourceType;
     if (!defined(sourceType)) {

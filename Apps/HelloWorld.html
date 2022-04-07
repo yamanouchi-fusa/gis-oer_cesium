@@ -87,6 +87,10 @@
         document.getElementById('contextmenu').style.display="block";
       }, false);
 
+      viewer.canvas.addEventListener('click',function (e){
+        document.getElementById('contextmenu').style.display="none";
+      });
+
       function menu1(){
         alert("menu1がクリックされました。");
       }

@@ -11,7 +11,25 @@
       content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
     />
     <title>Hello World!</title>
-    <script src="../Build/Cesium/Cesium.js"></script>
+    <script>
+      src="../Build/Cesium/Cesium.js"
+      var viewer = new Cesium.Viewer("cesiumContainer");
+      viewer.canvas.addEventListener('contextmenu', function(e){
+        document.getElementById('contextmenu').style.left=e.pageX+"px";
+        document.getElementById('contextmenu').style.top=e.pageY+"px";
+        document.getElementById('contextmenu').style.display="block";
+      }, false);
+      function menu1(){
+        alert("menu1がクリックされました。");
+      }
+      function menu2(){
+        alert("menu2がクリックされました。");
+      }
+      function menu3(){
+        alert("menu3がクリックされました。");
+      }
+    
+    </script>
     <style>
       @import url(../Build/Cesium/Widgets/widgets.css);
       html,
@@ -39,13 +57,13 @@
 
     </style>
   </head>
-  <body>
+  <body onContextmenu="return false;">
     <div id="cesiumContainer"></div>
     <div id="contextmenu">
       <ul>
-          <li>menu1</li>
-          <li>menu2</li>
-          <li>menu3</li>
+        <li onClick="menu1()">menu1</li>
+        <li onClick="menu2()">menu2</li>
+        <li onClick="menu3()">menu3</li>
       </ul>
     </div>
     <script>
@@ -79,16 +97,6 @@
                     }
                   }
                 ]
-      var viewer = new Cesium.Viewer("cesiumContainer");
-//       const buildingTileset = viewer.scene.primitives.add(Cesium.createOsmBuildings());
-//       viewer.dataSources.add(Cesium.CzmlDataSource.load(czml));
-//       viewer.dataSources.add(Cesium.CzmlDataSource.load("./SampleData/Vehicle.czml"));
-//       viewer.dataSources.add(Cesium.GeoJsonDataSource.load("./SampleData/abe.geojson"));
-//       viewer.dataSources.add(Cesium.GeoJsonDataSource.load("./SampleData/abe.czml"));
-      viewer.canvas.addEventListener('contextmenu', function(e){
-        document.getElementById('contextmenu').style.display="block";
-      }, false);
-
     </script>
   </body>
 </html>

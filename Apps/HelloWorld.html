@@ -13,21 +13,7 @@
     <title>Hello World!</title>
     <script>
       src="../Build/Cesium/Cesium.js"
-      var viewer = new Cesium.Viewer("cesiumContainer");
-      viewer.canvas.addEventListener('contextmenu', function(e){
-        document.getElementById('contextmenu').style.left=e.pageX+"px";
-        document.getElementById('contextmenu').style.top=e.pageY+"px";
-        document.getElementById('contextmenu').style.display="block";
-      }, false);
-      function menu1(){
-        alert("menu1がクリックされました。");
-      }
-      function menu2(){
-        alert("menu2がクリックされました。");
-      }
-      function menu3(){
-        alert("menu3がクリックされました。");
-      }
+
     
     </script>
     <style>
@@ -57,7 +43,7 @@
 
     </style>
   </head>
-  <body onContextmenu="return false;">
+  <body>
     <div id="cesiumContainer"></div>
     <div id="contextmenu">
       <ul>
@@ -97,6 +83,23 @@
                     }
                   }
                 ]
+
+      var viewer = new Cesium.Viewer("cesiumContainer");
+      viewer.canvas.addEventListener('contextmenu', function(e){
+        document.getElementById('contextmenu').style.left=e.pageX+"px";
+        document.getElementById('contextmenu').style.top=e.pageY+"px";
+        document.getElementById('contextmenu').style.display="block";
+      }, false);
+
+      function menu1(){
+        alert("menu1がクリックされました。");
+      }
+      function menu2(){
+        alert("menu2がクリックされました。");
+      }
+      function menu3(){
+        alert("menu3がクリックされました。");
+      }
     </script>
   </body>
 </html>

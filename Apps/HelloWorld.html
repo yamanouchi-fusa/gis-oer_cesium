@@ -104,16 +104,16 @@
       function menu1(){
         // alert("menu1がクリックされました。");
         var point = viewer.entities.add({
-        name:"点字ブロック", //レイヤ名
-        position : Cesium.Cartesian3.fromDegrees(longitudeString,latitudeString,0), //経度,緯度,高さ
-        point : {
+          name:"点字ブロック", //レイヤ名
+          position : Cesium.Cartesian3.fromDegrees(longitudeString,latitudeString,0), //経度,緯度,高さ
+          point : {
             pixelSize : 10, //ポイントのサイズ
             color : Cesium.Color.BLUE //ポイントの色
-        }
-    });
-
-    viewer.zoomTo(viewer.entities);　//レイヤにズーム
+          }
+        });
+        viewer.zoomTo(viewer.entities);//レイヤにズーム
       }
+
       function menu2(){
         alert("menu2がクリックされました。");
       }

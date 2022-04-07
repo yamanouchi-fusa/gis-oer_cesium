@@ -43,7 +43,7 @@
     <div id="cesiumContainer"></div>
     <div id="contextmenu">
       <ul>
-        <li onClick="menu1()">menu1</li>
+        <li onClick="menu1()">read object</li>
         <li onClick="menu2()">menu2</li>
         <li onClick="menu3()">menu3</li>
       </ul>
@@ -81,10 +81,20 @@
                 ]
 
       var viewer = new Cesium.Viewer("cesiumContainer");
+      var longitudeString;
+      var latitudeString;
       viewer.canvas.addEventListener('contextmenu', function(e){
-        document.getElementById('contextmenu').style.left=e.pageX+"px";
-        document.getElementById('contextmenu').style.top=e.pageY+"px";
-        document.getElementById('contextmenu').style.display="block";
+        var mousePosition = new Cesium.Cartesian2(e.clientX, e.clientY);
+        var ellipsoid = viewer.scene.globe.ellipsoid;
+        var cartesian = viewer.camera.pickEllipsoid(mousePosition, ellipsoid);
+        if (cartesian) {
+          var cartographic = ellipsoid.cartesianToCartographic(cartesian);
+          longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
+          latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
+          document.getElementById('contextmenu').style.left=e.pageX+"px";
+          document.getElementById('contextmenu').style.top=e.pageY+"px";
+          document.getElementById('contextmenu').style.display="block";
+        }
       }, false);
 
       viewer.canvas.addEventListener('click',function (e){
@@ -92,7 +102,17 @@
       });
 
       function menu1(){
-        alert("menu1がクリックされました。");
+        // alert("menu1がクリックされました。");
+        var point = viewer.entities.add({
+        name:"点字ブロック", //レイヤ名
+        position : Cesium.Cartesian3.fromDegrees(longitudeString,latitudeString,0), //経度,緯度,高さ
+        point : {
+            pixelSize : 10, //ポイントのサイズ
+            color : Cesium.Color.BLUE //ポイントの色
+        }
+    });
+
+    viewer.zoomTo(viewer.entities);　//レイヤにズーム
       }
       function menu2(){
         alert("menu2がクリックされました。");

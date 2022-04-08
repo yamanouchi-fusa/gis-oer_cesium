@@ -93,8 +93,7 @@
       }, false);
       
 
-      var menu1 = document.getElementById('menu1');
-      menu1.canvas.addEventListener('click',function(e) {
+      document.getElementById("menu1").addEventListener('click',function(e) {
         var mousePosition = new Cesium.Cartesian2(e.clientX, e.clientY);
         var ellipsoid = viewer.scene.globe.ellipsoid;
         var cartesian = viewer.camera.pickEllipsoid(mousePosition, ellipsoid);

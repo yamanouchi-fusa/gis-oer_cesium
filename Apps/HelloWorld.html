@@ -99,8 +99,7 @@
       }, false);
 
 
-      var $getListAItems = viewer.canvas.getElementById( "menuList" ).children;
-      $getListAItems[0].onclick = function() {
+      viewer.canvas.getElementById( "menu1" ).onclick = function() {
         var point = viewer.entities.add({
           name:"点字ブロック", //レイヤ名
           position : Cesium.Cartesian3.fromDegrees(longitudeString,latitudeString,0), //経度,緯度,高さ

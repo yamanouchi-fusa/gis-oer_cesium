@@ -42,11 +42,11 @@
   <body>
     <div id="cesiumContainer"></div>
     <div id="contextmenu">
-      <ul id="menuList" >
-        <li id = "menu1">read object</li>
-        <li id = "menu2">menu2</li>
-        <li id = "menu3">menu3</li>
-      </ul>
+      <ul>
+        <li onClick="menu1()">menu1</li>
+        <li onClick="menu2()">menu2</li>
+        <li onClick="menu3()">menu3</li>
+    </ul>
     </div>
     <script>
       var czml = [
@@ -85,57 +85,41 @@
       var latitudeString;
       
       viewer.canvas.addEventListener('contextmenu', function(e){
-        var mousePosition = new Cesium.Cartesian2(e.clientX, e.clientY);
-        var ellipsoid = viewer.scene.globe.ellipsoid;
-        var cartesian = viewer.camera.pickEllipsoid(mousePosition, ellipsoid);
-        if (cartesian) {
-          var cartographic = ellipsoid.cartesianToCartographic(cartesian);
-          longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
-          latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
           document.getElementById('contextmenu').style.left=e.pageX+"px";
           document.getElementById('contextmenu').style.top=e.pageY+"px";
           document.getElementById('contextmenu').style.display="block";
-        }
       }, false);
-
-
-      viewer.canvas.getElementById( "menu1" ).onclick = function() {
-        var point = viewer.entities.add({
-          name:"点字ブロック", //レイヤ名
-          position : Cesium.Cartesian3.fromDegrees(longitudeString,latitudeString,0), //経度,緯度,高さ
-          point : {
-            pixelSize : 10, //ポイントのサイズ
-            color : Cesium.Color.BLUE //ポイントの色
-          }
-        });
-        viewer.zoomTo(viewer.entities);//レイヤにズーム
-      }
-  
-      viewer.canvas.addEventListener('click',function (e){
-        document.getElementById('contextmenu').style.display="none";
-      });
-
       
 
-      // function menu1(){
-      //   // alert("menu1がクリックされました。");
-      //   var point = viewer.entities.add({
-      //     name:"点字ブロック", //レイヤ名
-      //     position : Cesium.Cartesian3.fromDegrees(longitudeString,latitudeString,0), //経度,緯度,高さ
-      //     point : {
-      //       pixelSize : 10, //ポイントのサイズ
-      //       color : Cesium.Color.BLUE //ポイントの色
-      //     }
-      //   });
-      //   viewer.zoomTo(viewer.entities);//レイヤにズーム
-      // }
+      function menu1(){
+        var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
+        //マウスが地球上にあることを判定
+        if (cartesian) {
+            //位置情報を管理するオブジェクトcartographicを取得
+            var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
+            //緯度経度を小数点5桁で取得
+            var lon = Cesium.Math.toDegrees(cartographic.longitude).toFixed(5);
+            var lat = Cesium.Math.toDegrees(cartographic.latitude).toFixed(5);
 
-      // function menu2(){
-      //   alert("menu2がクリックされました。");
-      // }
-      // function menu3(){
-      //   alert("menu3がクリックされました。");
-      // }
+            var point = viewer.entities.add({
+            name:"点字ブロック", //レイヤ名
+            position : Cesium.Cartesian3.fromDegrees(longitudeString,latitudeString,0), //経度,緯度,高さ
+            point : {
+              pixelSize : 10, //ポイントのサイズ
+              color : Cesium.Color.BLUE //ポイントの色
+            }
+          });
+          viewer.zoomTo(viewer.entities);//レイヤにズーム
+      
+        }
+      }
+      
+      function menu2(){
+        alert("menu2がクリックされました。");
+      }
+      function menu3(){
+        alert("menu3がクリックされました。");
+      }
     </script>
   </body>
 </html>

@@ -92,9 +92,12 @@
       
 
       function menu1(){
-        var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
-        //マウスが地球上にあることを判定
-        if (cartesian) {
+        var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+        handler.setInputAction( function(movement) {
+
+          var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
+          //マウスが地球上にあることを判定
+          if (cartesian) {
             //位置情報を管理するオブジェクトcartographicを取得
             var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
             //緯度経度を小数点5桁で取得
@@ -103,17 +106,17 @@
 
             var point = viewer.entities.add({
             name:"点字ブロック", //レイヤ名
-            position : Cesium.Cartesian3.fromDegrees(longitudeString,latitudeString,0), //経度,緯度,高さ
-            point : {
-              pixelSize : 10, //ポイントのサイズ
-              color : Cesium.Color.BLUE //ポイントの色
-            }
-          });
-          viewer.zoomTo(viewer.entities);//レイヤにズーム
-      
-        }
+              position : Cesium.Cartesian3.fromDegrees(lon,lat,0), //経度,緯度,高さ
+              point : {
+                pixelSize : 10, //ポイントのサイズ
+                color : Cesium.Color.BLUE //ポイントの色
+              }  
+            });
+            viewer.zoomTo(viewer.entities);//レイヤにズーム
+          }
+        }, Cesium.ScreenSpaceEventType.MOUSE_MOVE );
       }
-      
+
       function menu2(){
         alert("menu2がクリックされました。");
       }
